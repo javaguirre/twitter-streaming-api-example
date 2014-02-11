@@ -11,6 +11,9 @@ var path = require('path');
 var auth = require('./authentication.js');
 var passport = require('passport');
 var User = require('./user.js')
+var fs = require('fs')
+var Twit = require('twit')
+var config = require('./oauth.js')
 
 var app = express();
 
@@ -64,6 +67,24 @@ app.get('/auth/facebook/callback',
                                             scope: 'read_stream'
                                             }));
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+//Twitter
+var T = new Twit({
+  consumer_key: config.twitter.consumerKey,
+  consumer_secret: config.twitter.consumerSecret,
+  access_token: config.twitter.accessToken,
+  access_token_secret: config.twitter.accessTokenSecret
+})
+
+//Socket.io
+var io = require('socket.io').listen(server);
+var stream = T.stream('statuses/sample')
+
+io.sockets.on('connection', function (socket) {
+  // stream.on('tweet', function(tweet) {
+  //   socket.emit('info', { tweet: tweet});
+  // });
 });
