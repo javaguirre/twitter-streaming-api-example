@@ -1,0 +1,9 @@
+{
+  "name": "hashtagfight",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "bootstrap": "~3.0.1",
+    "react": "~0.8.0"
+  }
+}
