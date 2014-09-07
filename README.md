@@ -13,6 +13,7 @@ If you go to http://localhost:3000/fight you will get the Twitter stream
 
 # Oauth.js for Facebook and Twitter
 
+```javascript
 var ids = {
     facebook: {
         clientID: "",
@@ -29,3 +30,4 @@ var ids = {
 }
 
 module.exports = ids
+```
